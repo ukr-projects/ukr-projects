@@ -56,5 +56,5 @@
 
 
 <div align="left">
-  <img src="https://github-profile-trophy.vercel.app?username=UKR-PROJECTS&" height="150" alt="trophy graph"  />
+  <img src="https://github-profile-trophy.vercel.app?username=UKR-PROJECTS&" height="155" alt="trophy graph"  />
 </div>
