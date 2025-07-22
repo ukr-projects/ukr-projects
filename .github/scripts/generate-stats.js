@@ -71,7 +71,7 @@ async function main() {
   const badge = {
     schemaVersion: 1,
     label: "My Stats",
-    message: `⭐${totalStars} | 📊${totalContribs} | 🐛${issues.issueCount} | 📝${commits.commitCount}`,
+    message: `⭐${totalStars} | 📊${totalContribs} | 🐛${issuesClosed.issueCount} | 📝${commits.commitCount}`,
   };
   writeFileSync("stats/badge.json", JSON.stringify(badge, null, 2));
 }
