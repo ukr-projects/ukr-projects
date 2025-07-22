@@ -1,15 +1,17 @@
 // .github/scripts/generate-stats.js
-import { writeFileSync } from "fs";
-import { graphql } from "@octokit/graphql";
+const { writeFileSync } = require("fs");
+const { graphql } = require("@octokit/graphql");
 
 async function main() {
   const token = process.env.GITHUB_TOKEN;
   const username = "ukr-projects";
-  const orgs = ["notebook-nexus", "uikraft-hub"];  // add more orgs here
+  const orgs = ["notebook-nexus", "uikraft-hub"];
 
-  const gql = (query) => graphql(query, { headers: { authorization: `token ${token}` } });
+  // helper to run GraphQL
+  const gql = (query) =>
+    graphql(query, { headers: { authorization: `token ${token}` } });
 
-  // 1) Profile contributions count
+  // 1) Profile contributions
   const { viewer } = await gql(`
     {
       viewer {
@@ -21,10 +23,10 @@ async function main() {
   `);
   const totalContribs = viewer.contributionsCollection.contributionCalendar.totalContributions;
 
-  // 2) Issues opened by you
-  const { issues } = await gql(`
+  // 2) Issues closed by you
+  const { issuesClosed } = await gql(`
     {
-      issues: search(query: "author:${username} type:issue", type: ISSUE) {
+      issuesClosed: search(query: "type:issue state:closed closed-by:${username}", type: ISSUE) {
         issueCount
       }
     }
@@ -39,7 +41,7 @@ async function main() {
     }
   `);
 
-  // 4) Stars across your profile
+  // 4) Stars on your profile repos
   const { starred } = await gql(`
     {
       starred: search(query: "user:${username}", type: REPOSITORY) {
@@ -56,24 +58,25 @@ async function main() {
         org: organization(login: "${org}") {
           repos(first: 100) {
             nodes { stargazerCount }
-            pageInfo { hasNextPage endCursor }
           }
         }
       }
     `);
-    // sum the first 100 repos’ stars; add pagination if >100.
     orgStars += data.org.repos.nodes.reduce((s, r) => s + r.stargazerCount, 0);
   }
 
   const totalStars = starred.repositoryCount + orgStars;
 
-  // emit JSON for Shields
+  // create the badge JSON
   const badge = {
     schemaVersion: 1,
     label: "My Stats",
-    message: `⭐${totalStars} | 📊${totalContribs} | 🐛${issuesClosed.issueCount} | 📝${commits.commitCount}`,
+    message: `⭐${totalStars} | 📊${totalContribs} | ✅${issuesClosed.issueCount} | 📝${commits.commitCount}`
   };
   writeFileSync("stats/badge.json", JSON.stringify(badge, null, 2));
 }
 
-main();
+main().catch(err => {
+  console.error(err);
+  process.exit(1);
+});
