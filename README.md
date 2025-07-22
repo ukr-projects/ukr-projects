@@ -4,7 +4,7 @@
 
 <div align="center">
     
-![Organization Stats](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/ukr-projects/ukr-projects/main/stats/badge.json)
+
 
 </div>
 
