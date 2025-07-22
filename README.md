@@ -6,8 +6,6 @@
     
 ![Organization Stats](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/ukr-projects/ukr-projects/main/stats/badge.json)
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=ukr-projects&orgs=uikraft-hub&locale=en&hide_title=false&layout=compact&card_width=320&langs_count=10&theme=dracula&hide_border=false)
-
 </div>
 
 ###
