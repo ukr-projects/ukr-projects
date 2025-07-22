@@ -2,7 +2,7 @@ name: Build Composite Stats Badge
 
 on:
   schedule:
-    - cron: '*/5 * * * *'     # daily at 01:00 UTC
+    - cron: '*/5 * * * *'     # every five minutes
   workflow_dispatch:
 
 jobs:
