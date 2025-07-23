@@ -53,7 +53,7 @@ class GitHubStatsGenerator {
         await this.getOrganizationStats(org);
       }
       
-      // Calculate combined stats
+      // Calculate combined stats (avoiding double counting)
       this.calculateCombinedStats();
       
       // Generate SVG cards
@@ -252,6 +252,7 @@ class GitHubStatsGenerator {
   calculateCombinedStats() {
     console.log('🔄 Calculating combined statistics...');
     
+    // Start with personal stats as the base
     const combined = {
       totalRepos: this.stats.personal.totalRepos,
       totalStars: this.stats.personal.totalStars,
@@ -260,18 +261,48 @@ class GitHubStatsGenerator {
       languages: { ...this.stats.personal.languages }
     };
 
-    // Add organization stats
+    // Create a set of personal repository full names for deduplication
+    const personalRepoNames = new Set(
+      this.stats.personal.repositories.map(repo => repo.full_name.toLowerCase())
+    );
+
+    // Add organization stats, avoiding double counting
     for (const orgStats of Object.values(this.stats.organizations)) {
       if (orgStats.error) continue;
       
-      combined.totalRepos += orgStats.totalRepos;
-      combined.totalStars += orgStats.totalStars;
-      combined.totalCommits += orgStats.totalCommits;
-      combined.totalIssues += orgStats.totalIssues;
+      // Filter out repositories that are already counted in personal stats
+      const uniqueOrgRepos = orgStats.repositories.filter(repo => 
+        !personalRepoNames.has(repo.full_name.toLowerCase())
+      );
       
-      // Merge languages
+      // Calculate stats only for unique org repositories
+      const uniqueOrgStars = uniqueOrgRepos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
+      
+      // Add only unique organization repositories to combined stats
+      combined.totalRepos += uniqueOrgRepos.length;
+      combined.totalStars += uniqueOrgStars;
+      
+      // For commits and issues, we need to be more careful since we only sampled some repos
+      // We'll calculate the ratio and apply it
+      if (orgStats.repositories.length > 0) {
+        const sampledRepos = Math.min(30, orgStats.repositories.length);
+        const uniqueSampledRepos = orgStats.repositories.slice(0, sampledRepos).filter(repo => 
+          !personalRepoNames.has(repo.full_name.toLowerCase())
+        );
+        
+        if (uniqueSampledRepos.length > 0) {
+          const ratio = uniqueOrgRepos.length / orgStats.repositories.length;
+          combined.totalCommits += Math.round(orgStats.totalCommits * ratio);
+          combined.totalIssues += Math.round(orgStats.totalIssues * ratio);
+        }
+      }
+      
+      // Merge languages (only from unique repos)
+      // Note: This is an approximation since we can't easily separate language stats per repo
+      const orgLanguageRatio = uniqueOrgRepos.length / (orgStats.repositories.length || 1);
       for (const [lang, bytes] of Object.entries(orgStats.languages)) {
-        combined.languages[lang] = (combined.languages[lang] || 0) + bytes;
+        const adjustedBytes = Math.round(bytes * orgLanguageRatio);
+        combined.languages[lang] = (combined.languages[lang] || 0) + adjustedBytes;
       }
     }
 
@@ -444,18 +475,33 @@ class GitHubStatsGenerator {
   generateReadmeSection() {
     console.log('📝 Generating README section...');
     
-    const orgRepos = Object.values(this.stats.organizations)
-      .filter(org => !org.error)
-      .reduce((sum, org) => sum + org.totalRepos, 0);
-    const orgStars = Object.values(this.stats.organizations)
-      .filter(org => !org.error)
-      .reduce((sum, org) => sum + org.totalStars, 0);
-    const orgCommits = Object.values(this.stats.organizations)
-      .filter(org => !org.error)
-      .reduce((sum, org) => sum + org.totalCommits, 0);
-    const orgIssues = Object.values(this.stats.organizations)
-      .filter(org => !org.error)
-      .reduce((sum, org) => sum + org.totalIssues, 0);
+    // Calculate unique organization stats (excluding duplicates from personal)
+    const personalRepoNames = new Set(
+      this.stats.personal.repositories.map(repo => repo.full_name.toLowerCase())
+    );
+    
+    let uniqueOrgRepos = 0;
+    let uniqueOrgStars = 0;
+    let uniqueOrgCommits = 0;
+    let uniqueOrgIssues = 0;
+    
+    for (const orgStats of Object.values(this.stats.organizations)) {
+      if (orgStats.error) continue;
+      
+      const uniqueRepos = orgStats.repositories.filter(repo => 
+        !personalRepoNames.has(repo.full_name.toLowerCase())
+      );
+      
+      uniqueOrgRepos += uniqueRepos.length;
+      uniqueOrgStars += uniqueRepos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
+      
+      // Estimate commits and issues for unique repos
+      if (orgStats.repositories.length > 0) {
+        const ratio = uniqueRepos.length / orgStats.repositories.length;
+        uniqueOrgCommits += Math.round(orgStats.totalCommits * ratio);
+        uniqueOrgIssues += Math.round(orgStats.totalIssues * ratio);
+      }
+    }
     
     const readmeContent = `<!-- GitHub Stats - Auto Generated -->
 <div align="center">
@@ -468,12 +514,14 @@ class GitHubStatsGenerator {
 
 ## 📊 Quick Overview
 
-| Metric | Personal | Organizations | **Total** |
-|--------|----------|---------------|-----------|
-| 📚 Repositories | ${this.stats.personal.totalRepos} | ${orgRepos} | **${this.stats.combined.totalRepos}** |
-| ⭐ Stars | ${this.stats.personal.totalStars} | ${orgStars} | **${this.stats.combined.totalStars}** |
-| 💻 Commits | ${this.stats.personal.totalCommits} | ${orgCommits} | **${this.stats.combined.totalCommits}** |
-| 🐛 Issues | ${this.stats.personal.totalIssues} | ${orgIssues} | **${this.stats.combined.totalIssues}** |
+| Metric | Personal | Organizations (Unique) | **Total** |
+|--------|----------|------------------------|-----------|
+| 📚 Repositories | ${this.stats.personal.totalRepos} | ${uniqueOrgRepos} | **${this.stats.combined.totalRepos}** |
+| ⭐ Stars | ${this.stats.personal.totalStars} | ${uniqueOrgStars} | **${this.stats.combined.totalStars}** |
+| 💻 Commits | ${this.stats.personal.totalCommits} | ${uniqueOrgCommits} | **${this.stats.combined.totalCommits}** |
+| 🐛 Issues | ${this.stats.personal.totalIssues} | ${uniqueOrgIssues} | **${this.stats.combined.totalIssues}** |
+
+*Note: Organization stats exclude repositories already counted in personal stats to avoid double counting.*
 
 *Last updated: ${new Date().toISOString().split('T')[0]}*
 
