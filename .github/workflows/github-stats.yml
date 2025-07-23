@@ -27,12 +27,12 @@ jobs:
     - name: Install dependencies
       run: |
         npm init -y
-        npm install @octokit/rest canvas chartjs-node-canvas
+        npm install @octokit/rest
         
     - name: Generate stats
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PERSONAL_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       run: node generate-stats.js
       
     - name: Commit and push if changed
