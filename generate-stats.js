@@ -84,7 +84,6 @@ class GitHubStatsGenerator {
       user: user.data,
       totalRepos: repos.length,
       totalStars: repos.reduce((sum, repo) => sum + repo.stargazers_count, 0),
-      totalForks: repos.reduce((sum, repo) => sum + repo.forks_count, 0),
       totalWatchers: repos.reduce((sum, repo) => sum + repo.watchers_count, 0),
       languages: languages,
       repositories: repos
@@ -106,7 +105,6 @@ class GitHubStatsGenerator {
         org: org.data,
         totalRepos: repos.length,
         totalStars: repos.reduce((sum, repo) => sum + repo.stargazers_count, 0),
-        totalForks: repos.reduce((sum, repo) => sum + repo.forks_count, 0),
         totalWatchers: repos.reduce((sum, repo) => sum + repo.watchers_count, 0),
         languages: languages,
         repositories: repos
@@ -118,7 +116,6 @@ class GitHubStatsGenerator {
         error: error.message,
         totalRepos: 0,
         totalStars: 0,
-        totalForks: 0,
         totalWatchers: 0,
         languages: {},
         repositories: []
@@ -187,7 +184,6 @@ class GitHubStatsGenerator {
     const combined = {
       totalRepos: this.stats.personal.totalRepos,
       totalStars: this.stats.personal.totalStars,
-      totalForks: this.stats.personal.totalForks,
       totalWatchers: this.stats.personal.totalWatchers,
       languages: { ...this.stats.personal.languages }
     };
@@ -198,7 +194,6 @@ class GitHubStatsGenerator {
       
       combined.totalRepos += orgStats.totalRepos;
       combined.totalStars += orgStats.totalStars;
-      combined.totalForks += orgStats.totalForks;
       combined.totalWatchers += orgStats.totalWatchers;
       
       // Merge languages
@@ -235,7 +230,7 @@ class GitHubStatsGenerator {
     const stats = this.stats.combined;
     const theme = CONFIG.theme;
     
-    return `<svg width="495" height="195" xmlns="http://www.w3.org/2000/svg">
+    return `<svg width="495" height="175" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style="stop-color:${theme.primary};stop-opacity:0.1" />
@@ -243,8 +238,8 @@ class GitHubStatsGenerator {
         </linearGradient>
       </defs>
       
-      <rect width="495" height="195" rx="4.5" fill="${theme.background}" stroke="${theme.primary}" stroke-width="1"/>
-      <rect x="0" y="0" width="495" height="195" rx="4.5" fill="url(#gradient)"/>
+      <rect width="495" height="175" rx="4.5" fill="${theme.background}" stroke="${theme.primary}" stroke-width="1"/>
+      <rect x="0" y="0" width="495" height="175" rx="4.5" fill="url(#gradient)"/>
       
       <text x="25" y="35" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="18" font-weight="600" fill="${theme.primary}">
         🚀 Complete GitHub Statistics
@@ -257,9 +252,6 @@ class GitHubStatsGenerator {
         ⭐ Total Stars: ${stats.totalStars}
       </text>
       <text x="25" y="105" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="${theme.text}">
-        🍴 Total Forks: ${stats.totalForks}
-      </text>
-      <text x="25" y="125" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="${theme.text}">
         👁️ Total Watchers: ${stats.totalWatchers}
       </text>
       
@@ -270,7 +262,7 @@ class GitHubStatsGenerator {
         🏢 Organizations: ${Object.keys(this.stats.organizations).length} orgs
       </text>
       
-      <text x="25" y="165" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="12" fill="${theme.secondary}">
+      <text x="25" y="145" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="12" fill="${theme.secondary}">
         🔄 Last updated: ${new Date().toISOString().split('T')[0]}
       </text>
     </svg>`;
@@ -330,7 +322,7 @@ class GitHubStatsGenerator {
         👤 Personal (${CONFIG.username})
       </text>
       <text x="25" y="${yOffset + 20}" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="${theme.text}">
-        📊 ${this.stats.personal.totalRepos} repos • ⭐ ${this.stats.personal.totalStars} stars • 🍴 ${this.stats.personal.totalForks} forks
+        📊 ${this.stats.personal.totalRepos} repos • ⭐ ${this.stats.personal.totalStars} stars • 👁️ ${this.stats.personal.totalWatchers} watchers
       </text>`;
     
     yOffset += 50;
@@ -351,7 +343,7 @@ class GitHubStatsGenerator {
             🏢 ${orgName}
           </text>
           <text x="25" y="${yOffset + 20}" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="${theme.text}">
-            📊 ${orgStats.totalRepos} repos • ⭐ ${orgStats.totalStars} stars • 🍴 ${orgStats.totalForks} forks
+            📊 ${orgStats.totalRepos} repos • ⭐ ${orgStats.totalStars} stars • 👁️ ${orgStats.totalWatchers} watchers
           </text>`;
       }
       yOffset += 60;
@@ -379,7 +371,7 @@ class GitHubStatsGenerator {
 |--------|----------|---------------|-----------|
 | 📚 Repositories | ${this.stats.personal.totalRepos} | ${this.stats.combined.totalRepos - this.stats.personal.totalRepos} | **${this.stats.combined.totalRepos}** |
 | ⭐ Stars | ${this.stats.personal.totalStars} | ${this.stats.combined.totalStars - this.stats.personal.totalStars} | **${this.stats.combined.totalStars}** |
-| 🍴 Forks | ${this.stats.personal.totalForks} | ${this.stats.combined.totalForks - this.stats.personal.totalForks} | **${this.stats.combined.totalForks}** |
+| 👁️ Watchers | ${this.stats.personal.totalWatchers} | ${this.stats.combined.totalWatchers - this.stats.personal.totalWatchers} | **${this.stats.combined.totalWatchers}** |
 
 *Last updated: ${new Date().toISOString().split('T')[0]}*
 
