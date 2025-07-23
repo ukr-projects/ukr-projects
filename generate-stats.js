@@ -1,5 +1,4 @@
 // generate-stats.js
-const { Octokit } = require('@octokit/rest');
 const fs = require('fs');
 const path = require('path');
 
@@ -18,11 +17,6 @@ const CONFIG = {
   }
 };
 
-// Initialize Octokit
-const octokit = new Octokit({
-  auth: process.env.PERSONAL_ACCESS_TOKEN || process.env.GITHUB_TOKEN,
-});
-
 class GitHubStatsGenerator {
   constructor() {
     this.stats = {
@@ -32,12 +26,25 @@ class GitHubStatsGenerator {
       languages: {},
       recentActivity: []
     };
+    this.octokit = null;
+  }
+
+  async initialize() {
+    // Dynamic import for ES modules
+    const { Octokit } = await import('@octokit/rest');
+    
+    this.octokit = new Octokit({
+      auth: process.env.PERSONAL_ACCESS_TOKEN || process.env.GITHUB_TOKEN,
+    });
   }
 
   async generateAllStats() {
     console.log('🚀 Starting GitHub stats generation...');
     
     try {
+      // Initialize Octokit with dynamic import
+      await this.initialize();
+      
       // Get personal stats
       await this.getPersonalStats();
       
@@ -66,7 +73,7 @@ class GitHubStatsGenerator {
   async getPersonalStats() {
     console.log(`📊 Fetching personal stats for ${CONFIG.username}...`);
     
-    const user = await octokit.rest.users.getByUsername({
+    const user = await this.octokit.rest.users.getByUsername({
       username: CONFIG.username
     });
 
@@ -88,7 +95,7 @@ class GitHubStatsGenerator {
     console.log(`🏢 Fetching organization stats for ${orgName}...`);
     
     try {
-      const org = await octokit.rest.orgs.get({
+      const org = await this.octokit.rest.orgs.get({
         org: orgName
       });
 
@@ -125,13 +132,13 @@ class GitHubStatsGenerator {
     
     while (true) {
       const response = isOrg 
-        ? await octokit.rest.repos.listForOrg({
+        ? await this.octokit.rest.repos.listForOrg({
             org: owner,
             type: 'all',
             per_page: 100,
             page
           })
-        : await octokit.rest.repos.listForUser({
+        : await this.octokit.rest.repos.listForUser({
             username: owner,
             type: 'all',
             per_page: 100,
@@ -157,7 +164,7 @@ class GitHubStatsGenerator {
     
     for (const repo of repos.slice(0, 50)) { // Limit to avoid rate limits
       try {
-        const response = await octokit.rest.repos.listLanguages({
+        const response = await this.octokit.rest.repos.listLanguages({
           owner: owner,
           repo: repo.name
         });
@@ -385,5 +392,9 @@ class GitHubStatsGenerator {
 }
 
 // Run the generator
-const generator = new GitHubStatsGenerator();
-generator.generateAllStats();
+async function main() {
+  const generator = new GitHubStatsGenerator();
+  await generator.generateAllStats();
+}
+
+main().catch(console.error);
