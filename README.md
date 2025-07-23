@@ -2,7 +2,34 @@
 
 ###
 
+<div align="center">
 
+## 🚀 Developer Profile
+![GitHub followers](https://img.shields.io/github/followers/ukr-projects?style=social)
+
+---
+
+### 📊 Comprehensive Statistics
+
+![GitHub Stats](./assets/github-stats.svg)
+
+---
+
+### 🏆 GitHub Trophies
+![GitHub Trophies](https://github-profile-trophy.vercel.app/?username=ukr-projects&theme=onedark&column=4)
+
+### 💻 Language Statistics
+![Languages](./assets/languages.svg)
+
+### 🏢 Organization Overview
+![Organizations](./assets/organizations.svg)
+
+---
+
+### 📈 Contribution Graph
+![GitHub Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=ukr-projects&theme=react-dark)
+
+</div>
 
 ###
 
