@@ -5,7 +5,7 @@ const path = require('path');
 // Configuration
 const CONFIG = {
   username: 'ukr-projects', // Replace with your GitHub username
-  organizations: ['uikraft-hub', 'notebook-nexus'], // Replace with your organization names
+  organizations: ['uikraft-hub', 'notebook-nexus', 'nova-cortex'], // Replace with your organization names
   includePrivate: true,
   includeForks: false,
   theme: {
