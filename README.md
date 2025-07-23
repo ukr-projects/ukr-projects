@@ -82,18 +82,8 @@
 ## 📊 GitHub Analytics
 
 <div align="center">
-  <table>
-    <tr>
-      <td width="50%">
-        <img src="./assets/github-stats.svg" alt="GitHub Stats" width="100%" />
-      </td>
-      <td width="50%">
-        <img src="./assets/languages.svg" alt="Top Languages" width="100%" />
-      </td>
-    </tr>
-  </table>
-  
-  <img src="./assets/organizations.svg" alt="Organizations" width="60%" />
+  <img src="./assets/github-stats.svg" alt="GitHub Stats" width="100%" />
+  <img src="./assets/organizations.svg" alt="Organizations" width="100%" />
 </div>
 
 ---
@@ -139,24 +129,9 @@
 
 ---
 
-## 🌟 Featured Projects
+## 🌟 Top Languages
 
-<div align="center">
-  <table>
-    <tr>
-      <td width="50%">
-        <a href="https://github.com/uikraft-hub/yt-downloader-gui">
-          <img src="https://github-readme-stats.vercel.app/api/pin/?username=ukr-projects&repo=yt-downloader-gui&theme=tokyonight&hide_border=true" />
-        </a>
-      </td>
-      <td width="50%">
-        <a href="https://github.com/uikraft-hub/insta-downloader-gui">
-          <img src="https://github-readme-stats.vercel.app/api/pin/?username=ukr-projects&repo=insta-downloader-gui&theme=tokyonight&hide_border=true" />
-        </a>
-      </td>
-    </tr>
-  </table>
-</div>
+<img src="./assets/languages.svg" alt="Top Languages" width="100%" />
 
 ---
 
