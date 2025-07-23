@@ -1,31 +1,43 @@
-name: Build Composite Stats Badge
+# .github/workflows/github-stats.yml
+name: Generate GitHub Stats
 
 on:
   schedule:
-    - cron: '*/5 * * * *'     # every five minutes
-  workflow_dispatch:
+    # Run every day at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allow manual trigger
+  push:
+    branches: [ main ]
 
 jobs:
-  build:
+  generate-stats:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-
-      - name: Install dependencies
-        run: npm install @octokit/graphql
-
-      - name: Generate badge JSON
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node .github/scripts/generate-stats.cjs
-
-      - name: Commit JSON
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "chore: update composite stats badge"
-          file_pattern: stats/badge.json
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: |
+        npm init -y
+        npm install @octokit/rest canvas chartjs-node-canvas
+        
+    - name: Generate stats
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PERSONAL_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      run: node generate-stats.js
+      
+    - name: Commit and push if changed
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update GitHub stats" && git push)
