@@ -11,9 +11,10 @@
 
 | Metric | Personal | Organizations | **Total** |
 |--------|----------|---------------|-----------|
-| 📚 Repositories | 9 | 7 | **16** |
+| 📚 Repositories | 8 | 7 | **15** |
 | ⭐ Stars | 41 | 38 | **79** |
-| 👁️ Watchers | 41 | 38 | **79** |
+| 💻 Commits | 471 | 394 | **865** |
+| 🐛 Issues | 4 | 4 | **8** |
 
 *Last updated: 2025-07-23*
 
