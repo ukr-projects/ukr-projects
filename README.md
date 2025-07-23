@@ -101,20 +101,6 @@
 
 ---
 
-## 🏆 Achievements
-
-<div align="center">
-  <table>
-    <tr>
-      <td width="50%">
-        <img src="https://github-profile-trophy.vercel.app/?username=ukr-projects&theme=tokyonight&no-frame=true&column=3&margin-w=15&margin-h=15" alt="GitHub Trophies" />
-      </td>
-    </tr>
-  </table>
-</div>
-
----
-
 ## 🎯 Current Focus
 
 <div align="center">
