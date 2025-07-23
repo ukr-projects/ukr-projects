@@ -2,66 +2,7 @@
 
 ###
 
-<div align="center">
-  
-  <h1>🚀 GitHub Portfolio Dashboard</h1>
-  
-  <table>
-    <!-- Personal Stats Row -->
-    <tr>
-      <td colspan="2" align="center">
-        <h2>👤 Personal Account: ukr-projects</h2>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <img src="https://github-readme-stats.vercel.app/api?username=ukr-projects&show_icons=true&theme=vue-dark&include_all_commits=true&count_private=true&hide_border=true&bg_color=1a1b27&title_color=70a5fd&text_color=38bdae&icon_color=bf91f3"/>
-      </td>
-      <td>
-        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ukr-projects&layout=compact&langs_count=8&theme=vue-dark&hide_border=true&bg_color=1a1b27&title_color=70a5fd&text_color=38bdae"/>
-      </td>
-    </tr>
-    
-    <!-- Organization 1 Stats Row -->
-    <tr>
-      <td colspan="2" align="center">
-        <h2>🏢 Organization: uikraft-hub</h2>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <img src="https://github-readme-stats.vercel.app/api?username=uikraft-hub&show_icons=true&theme=vue-dark&include_all_commits=true&hide_border=true&bg_color=1a1b27&title_color=70a5fd&text_color=38bdae&icon_color=bf91f3"/>
-      </td>
-      <td>
-        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=uikraft-hub&layout=compact&langs_count=8&theme=vue-dark&hide_border=true&bg_color=1a1b27&title_color=70a5fd&text_color=38bdae"/>
-      </td>
-    </tr>
-    
-    <!-- Organization 2 Stats Row -->
-    <tr>
-      <td colspan="2" align="center">
-        <h2>💼 Organization: notebook-nexus</h2>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <img src="https://github-readme-stats.vercel.app/api?username=notebook-nexus&show_icons=true&theme=vue-dark&include_all_commits=true&hide_border=true&bg_color=1a1b27&title_color=70a5fd&text_color=38bdae&icon_color=bf91f3"/>
-      </td>
-      <td>
-        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=notebook-nexus&layout=compact&langs_count=8&theme=vue-dark&hide_border=true&bg_color=1a1b27&title_color=70a5fd&text_color=38bdae"/>
-      </td>
-    </tr>
-    
-    <!-- Activity Section -->
-    <tr>
-      <td colspan="2" align="center">
-        <h2>📊 Activity Overview</h2>
-        <img src="https://streak-stats.demolab.com/?user=ukr-projects&theme=vue-dark&hide_border=true&stroke=38bdae&background=1a1b27&ring=70a5fd&fire=bf91f3"/>
-      </td>
-    </tr>
-  </table>
-  
-</div>
+
 
 ###
 
