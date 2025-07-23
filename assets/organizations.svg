@@ -1,5 +1,5 @@
-<svg width="495" height="280" xmlns="http://www.w3.org/2000/svg">
-      <rect width="495" height="280" rx="4.5" fill="#1a1b27" stroke="#70a5fd" stroke-width="1"/>
+<svg width="495" height="360" xmlns="http://www.w3.org/2000/svg">
+      <rect width="495" height="360" rx="4.5" fill="#1a1b27" stroke="#70a5fd" stroke-width="1"/>
       
       <text x="25" y="35" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="18" font-weight="600" fill="#70a5fd">
         🏢 Organizations Breakdown
@@ -11,7 +11,7 @@
         📊 8 repos • ⭐ 41 stars
       </text>
       <text x="25" y="110" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-        💻 476 commits • 🐛 4 issues
+        💻 478 commits • 🐛 4 issues
       </text>
           <text x="25" y="140" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="16" font-weight="600" fill="#bf91f3">
             🏢 uikraft-hub
@@ -20,7 +20,7 @@
             📊 5 repos • ⭐ 21 stars
           </text>
           <text x="25" y="180" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-            💻 368 commits • 🐛 3 issues
+            💻 369 commits • 🐛 3 issues
           </text>
           <text x="25" y="220" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="16" font-weight="600" fill="#bf91f3">
             🏢 notebook-nexus
@@ -29,5 +29,14 @@
             📊 2 repos • ⭐ 17 stars
           </text>
           <text x="25" y="260" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-            💻 26 commits • 🐛 1 issues
+            💻 27 commits • 🐛 1 issues
+          </text>
+          <text x="25" y="300" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="16" font-weight="600" fill="#bf91f3">
+            🏢 nova-cortex
+          </text>
+          <text x="25" y="320" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
+            📊 2 repos • ⭐ 2 stars
+          </text>
+          <text x="25" y="340" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
+            💻 41 commits • 🐛 0 issues
           </text></svg>
