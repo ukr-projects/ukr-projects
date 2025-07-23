@@ -81,13 +81,10 @@
 
 ## 📊 GitHub Analytics
 
-<div align="center">
+<div>
   <img src="./assets/github-stats.svg" alt="GitHub Stats" />
-  <img width="150" />
   <img src="./assets/languages.svg" alt="Top Languages" />
-  <img width="150" />  
   <img src="./assets/organizations.svg" alt="Organizations" />
-  <img width="150" />  
 </div>
 
 ---
