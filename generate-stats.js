@@ -711,4 +711,26 @@ class GitHubStatsGenerator {
 *Last updated: ${new Date().toISOString().split('T')[0]}*
 
 </div>
-<!-- End GitHub Stats -->`
+<!-- End GitHub Stats -->`;
+
+    // Write the README section to file
+    fs.writeFileSync('github-stats-section.md', readmeContent);
+    console.log('✅ README section generated: github-stats-section.md');
+  }
+}
+
+// Main execution
+async function main() {
+  const generator = new GitHubStatsGenerator();
+  await generator.generateAllStats();
+}
+
+// Run the script
+if (require.main === module) {
+  main().catch(error => {
+    console.error('Fatal error:', error);
+    process.exit(1);
+  });
+}
+
+module.exports = GitHubStatsGenerator;
