@@ -11,10 +11,10 @@
         📊 8 repos • ⭐ 43 stars
       </text>
       <text x="25" y="110" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-        💻 559 commits • 🐛 4 issues
+        💻 563 commits • 🐛 4 issues
       </text>
       <text x="25" y="130" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-        📏 0 lines of code
+        📏 9,465 lines of code
       </text>
           <text x="25" y="160" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="16" font-weight="600" fill="#bf91f3">
             🏢 uikraft-hub
@@ -26,7 +26,7 @@
             💻 414 commits • 🐛 3 issues
           </text>
           <text x="25" y="220" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-            📏 0 lines of code
+            📏 6,690 lines of code
           </text>
           <text x="25" y="260" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="16" font-weight="600" fill="#bf91f3">
             🏢 notebook-nexus
@@ -38,7 +38,7 @@
             💻 42 commits • 🐛 1 issues
           </text>
           <text x="25" y="320" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-            📏 0 lines of code
+            📏 434 lines of code
           </text>
           <text x="25" y="360" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="16" font-weight="600" fill="#bf91f3">
             🏢 nova-cortex
@@ -50,5 +50,5 @@
             💻 52 commits • 🐛 0 issues
           </text>
           <text x="25" y="420" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-            📏 0 lines of code
+            📏 1,487 lines of code
           </text></svg>
