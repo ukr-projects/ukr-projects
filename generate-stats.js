@@ -416,7 +416,6 @@ class GitHubStatsGenerator {
     console.log(`📏 Estimated total lines of code for ${owner}: ${totalLines}`);
     return totalLines;
   }
-}
 
   calculateCombinedStats() {
     console.log('🔄 Calculating combined statistics...');
@@ -712,17 +711,4 @@ class GitHubStatsGenerator {
 *Last updated: ${new Date().toISOString().split('T')[0]}*
 
 </div>
-<!-- End GitHub Stats -->
-`;
-
-    fs.writeFileSync('README-stats.md', readmeContent);
-  }
-}
-
-// Run the generator
-async function main() {
-  const generator = new GitHubStatsGenerator();
-  await generator.generateAllStats();
-}
-
-main().catch(console.error);
+<!-- End GitHub Stats -->`
