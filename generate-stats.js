@@ -80,6 +80,7 @@ class GitHubStatsGenerator {
     const repos = await this.getAllRepos(CONFIG.username);
     const languages = await this.getLanguageStats(repos, CONFIG.username);
     const { totalCommits, totalIssues } = await this.getCommitsAndIssues(repos, CONFIG.username);
+    const totalLinesOfCode = await this.getTotalLinesOfCode(repos, CONFIG.username);
     
     this.stats.personal = {
       user: user.data,
@@ -87,6 +88,7 @@ class GitHubStatsGenerator {
       totalStars: repos.reduce((sum, repo) => sum + repo.stargazers_count, 0),
       totalCommits: totalCommits,
       totalIssues: totalIssues,
+      totalLinesOfCode: totalLinesOfCode,
       languages: languages,
       repositories: repos
     };
@@ -103,6 +105,7 @@ class GitHubStatsGenerator {
       const repos = await this.getAllRepos(orgName, true);
       const languages = await this.getLanguageStats(repos, orgName);
       const { totalCommits, totalIssues } = await this.getCommitsAndIssues(repos, orgName);
+      const totalLinesOfCode = await this.getTotalLinesOfCode(repos, orgName);
       
       this.stats.organizations[orgName] = {
         org: org.data,
@@ -110,6 +113,7 @@ class GitHubStatsGenerator {
         totalStars: repos.reduce((sum, repo) => sum + repo.stargazers_count, 0),
         totalCommits: totalCommits,
         totalIssues: totalIssues,
+        totalLinesOfCode: totalLinesOfCode,
         languages: languages,
         repositories: repos
       };
@@ -122,6 +126,7 @@ class GitHubStatsGenerator {
         totalStars: 0,
         totalCommits: 0,
         totalIssues: 0,
+        totalLinesOfCode: 0,
         languages: {},
         repositories: []
       };
@@ -249,6 +254,91 @@ class GitHubStatsGenerator {
     return { totalCommits, totalIssues };
   }
 
+  async getTotalLinesOfCode(repos, owner) {
+    console.log(`📏 Calculating lines of code for ${owner}...`);
+    let totalLines = 0;
+    
+    // File extensions to consider as code
+    const codeExtensions = new Set([
+      '.js', '.jsx', '.ts', '.tsx', '.py', '.java', '.cpp', '.c', '.h', '.hpp',
+      '.cs', '.php', '.rb', '.go', '.rs', '.swift', '.kt', '.scala', '.sh',
+      '.html', '.css', '.scss', '.sass', '.less', '.vue', '.svelte', '.dart',
+      '.r', '.m', '.mm', '.pl', '.lua', '.clj', '.hs', '.elm', '.ex', '.exs',
+      '.jl', '.nim', '.zig', '.crystal', '.d', '.f90', '.f95', '.pas', '.vb',
+      '.sql', '.graphql', '.yaml', '.yml', '.json', '.xml', '.toml', '.ini'
+    ]);
+
+    for (const repo of repos.slice(0, 20)) { // Limit to avoid rate limits and API abuse
+      try {
+        // Get repository contents
+        const contents = await this.getRepositoryContents(owner, repo.name, '', codeExtensions);
+        totalLines += contents;
+        
+        // Add a small delay to avoid hitting rate limits too hard
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+      } catch (error) {
+        console.warn(`Could not fetch contents for ${owner}/${repo.name}:`, error.message);
+        continue;
+      }
+    }
+    
+    return totalLines;
+  }
+
+  async getRepositoryContents(owner, repo, path = '', codeExtensions, depth = 0) {
+    // Limit recursion depth to avoid infinite loops and excessive API calls
+    if (depth > 3) return 0;
+    
+    let totalLines = 0;
+    
+    try {
+      const response = await this.octokit.rest.repos.getContent({
+        owner: owner,
+        repo: repo,
+        path: path
+      });
+      
+      const contents = Array.isArray(response.data) ? response.data : [response.data];
+      
+      for (const item of contents.slice(0, 50)) { // Limit items per directory
+        if (item.type === 'file') {
+          // Check if it's a code file
+          const ext = path.extname(item.name).toLowerCase();
+          if (codeExtensions.has(ext) && item.size && item.size < 1000000) { // Skip very large files
+            try {
+              // Get file content
+              const fileResponse = await this.octokit.rest.repos.getContent({
+                owner: owner,
+                repo: repo,
+                path: item.path
+              });
+              
+              if (fileResponse.data.content) {
+                const content = Buffer.from(fileResponse.data.content, 'base64').toString('utf-8');
+                const lines = content.split('\n').filter(line => line.trim().length > 0);
+                totalLines += lines.length;
+              }
+            } catch (fileError) {
+              // Skip files we can't read
+              continue;
+            }
+          }
+        } else if (item.type === 'dir' && depth < 3) {
+          // Recursively get contents of subdirectories
+          const subdirLines = await this.getRepositoryContents(owner, repo, item.path, codeExtensions, depth + 1);
+          totalLines += subdirLines;
+        }
+      }
+      
+    } catch (error) {
+      // If we can't access the repository or path, return 0
+      return 0;
+    }
+    
+    return totalLines;
+  }
+
   calculateCombinedStats() {
     console.log('🔄 Calculating combined statistics...');
     
@@ -258,6 +348,7 @@ class GitHubStatsGenerator {
       totalStars: this.stats.personal.totalStars,
       totalCommits: this.stats.personal.totalCommits,
       totalIssues: this.stats.personal.totalIssues,
+      totalLinesOfCode: this.stats.personal.totalLinesOfCode,
       languages: { ...this.stats.personal.languages }
     };
 
@@ -282,7 +373,7 @@ class GitHubStatsGenerator {
       combined.totalRepos += uniqueOrgRepos.length;
       combined.totalStars += uniqueOrgStars;
       
-      // For commits and issues, we need to be more careful since we only sampled some repos
+      // For commits, issues, and lines of code, we need to be more careful since we only sampled some repos
       // We'll calculate the ratio and apply it
       if (orgStats.repositories.length > 0) {
         const sampledRepos = Math.min(30, orgStats.repositories.length);
@@ -294,6 +385,7 @@ class GitHubStatsGenerator {
           const ratio = uniqueOrgRepos.length / orgStats.repositories.length;
           combined.totalCommits += Math.round(orgStats.totalCommits * ratio);
           combined.totalIssues += Math.round(orgStats.totalIssues * ratio);
+          combined.totalLinesOfCode += Math.round(orgStats.totalLinesOfCode * ratio);
         }
       }
       
@@ -334,7 +426,7 @@ class GitHubStatsGenerator {
     const stats = this.stats.combined;
     const theme = CONFIG.theme;
     
-    return `<svg width="495" height="195" xmlns="http://www.w3.org/2000/svg">
+    return `<svg width="495" height="215" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style="stop-color:${theme.primary};stop-opacity:0.1" />
@@ -342,8 +434,8 @@ class GitHubStatsGenerator {
         </linearGradient>
       </defs>
       
-      <rect width="495" height="195" rx="4.5" fill="${theme.background}" stroke="${theme.primary}" stroke-width="1"/>
-      <rect x="0" y="0" width="495" height="195" rx="4.5" fill="url(#gradient)"/>
+      <rect width="495" height="215" rx="4.5" fill="${theme.background}" stroke="${theme.primary}" stroke-width="1"/>
+      <rect x="0" y="0" width="495" height="215" rx="4.5" fill="url(#gradient)"/>
       
       <text x="25" y="35" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="18" font-weight="600" fill="${theme.primary}">
         🚀 Complete GitHub Statistics
@@ -361,6 +453,9 @@ class GitHubStatsGenerator {
       <text x="25" y="125" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="${theme.text}">
         🐛 Total Issues: ${stats.totalIssues}
       </text>
+      <text x="25" y="145" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="${theme.text}">
+        📏 Total Lines of Code: ${stats.totalLinesOfCode.toLocaleString()}
+      </text>
       
       <text x="270" y="65" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="${theme.text}">
         🏠 Personal: ${this.stats.personal.totalRepos} repos, ${this.stats.personal.totalStars} stars
@@ -374,8 +469,11 @@ class GitHubStatsGenerator {
       <text x="270" y="125" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="${theme.text}">
         🐛 Personal Issues: ${this.stats.personal.totalIssues}
       </text>
+      <text x="270" y="145" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="${theme.text}">
+        📏 Personal LoC: ${this.stats.personal.totalLinesOfCode.toLocaleString()}
+      </text>
       
-      <text x="25" y="165" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="12" fill="${theme.secondary}">
+      <text x="25" y="185" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="12" fill="${theme.secondary}">
         🔄 Last updated: ${new Date().toISOString().split('T')[0]}
       </text>
     </svg>`;
@@ -420,8 +518,8 @@ class GitHubStatsGenerator {
   createOrganizationsCard() {
     const theme = CONFIG.theme;
     
-    let svg = `<svg width="495" height="${120 + (Object.keys(this.stats.organizations).length * 80)}" xmlns="http://www.w3.org/2000/svg">
-      <rect width="495" height="${120 + (Object.keys(this.stats.organizations).length * 80)}" rx="4.5" fill="${theme.background}" stroke="${theme.primary}" stroke-width="1"/>
+    let svg = `<svg width="495" height="${140 + (Object.keys(this.stats.organizations).length * 100)}" xmlns="http://www.w3.org/2000/svg">
+      <rect width="495" height="${140 + (Object.keys(this.stats.organizations).length * 100)}" rx="4.5" fill="${theme.background}" stroke="${theme.primary}" stroke-width="1"/>
       
       <text x="25" y="35" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="18" font-weight="600" fill="${theme.primary}">
         🏢 Organizations Breakdown
@@ -439,9 +537,12 @@ class GitHubStatsGenerator {
       </text>
       <text x="25" y="${yOffset + 40}" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="${theme.text}">
         💻 ${this.stats.personal.totalCommits} commits • 🐛 ${this.stats.personal.totalIssues} issues
+      </text>
+      <text x="25" y="${yOffset + 60}" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="${theme.text}">
+        📏 ${this.stats.personal.totalLinesOfCode.toLocaleString()} lines of code
       </text>`;
     
-    yOffset += 70;
+    yOffset += 90;
     
     // Organization stats
     for (const [orgName, orgStats] of Object.entries(this.stats.organizations)) {
@@ -463,9 +564,12 @@ class GitHubStatsGenerator {
           </text>
           <text x="25" y="${yOffset + 40}" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="${theme.text}">
             💻 ${orgStats.totalCommits} commits • 🐛 ${orgStats.totalIssues} issues
+          </text>
+          <text x="25" y="${yOffset + 60}" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="${theme.text}">
+            📏 ${orgStats.totalLinesOfCode.toLocaleString()} lines of code
           </text>`;
       }
-      yOffset += 80;
+      yOffset += 100;
     }
     
     svg += `</svg>`;
@@ -484,6 +588,7 @@ class GitHubStatsGenerator {
     let uniqueOrgStars = 0;
     let uniqueOrgCommits = 0;
     let uniqueOrgIssues = 0;
+    let uniqueOrgLinesOfCode = 0;
     
     for (const orgStats of Object.values(this.stats.organizations)) {
       if (orgStats.error) continue;
@@ -495,11 +600,12 @@ class GitHubStatsGenerator {
       uniqueOrgRepos += uniqueRepos.length;
       uniqueOrgStars += uniqueRepos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
       
-      // Estimate commits and issues for unique repos
+      // Estimate commits, issues, and lines of code for unique repos
       if (orgStats.repositories.length > 0) {
         const ratio = uniqueRepos.length / orgStats.repositories.length;
         uniqueOrgCommits += Math.round(orgStats.totalCommits * ratio);
         uniqueOrgIssues += Math.round(orgStats.totalIssues * ratio);
+        uniqueOrgLinesOfCode += Math.round(orgStats.totalLinesOfCode * ratio);
       }
     }
     
@@ -520,6 +626,7 @@ class GitHubStatsGenerator {
 | ⭐ Stars | ${this.stats.personal.totalStars} | ${uniqueOrgStars} | **${this.stats.combined.totalStars}** |
 | 💻 Commits | ${this.stats.personal.totalCommits} | ${uniqueOrgCommits} | **${this.stats.combined.totalCommits}** |
 | 🐛 Issues | ${this.stats.personal.totalIssues} | ${uniqueOrgIssues} | **${this.stats.combined.totalIssues}** |
+| 📏 Lines of Code | ${this.stats.personal.totalLinesOfCode.toLocaleString()} | ${uniqueOrgLinesOfCode.toLocaleString()} | **${this.stats.combined.totalLinesOfCode.toLocaleString()}** |
 
 *Note: Organization stats exclude repositories already counted in personal stats to avoid double counting.*
 
