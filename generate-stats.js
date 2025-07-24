@@ -268,27 +268,35 @@ class GitHubStatsGenerator {
       '.sql', '.graphql', '.yaml', '.yml', '.json', '.xml', '.toml', '.ini'
     ]);
 
-    for (const repo of repos.slice(0, 20)) { // Limit to avoid rate limits and API abuse
+    // Filter out empty repositories and forks if configured
+    const validRepos = repos.filter(repo => !repo.empty && repo.size > 0);
+    
+    for (const repo of validRepos.slice(0, 20)) { // Limit to avoid rate limits
       try {
+        console.log(`  📂 Processing ${repo.full_name}...`);
+        
         // Get repository contents
         const contents = await this.getRepositoryContents(owner, repo.name, '', codeExtensions);
         totalLines += contents;
         
-        // Add a small delay to avoid hitting rate limits too hard
-        await new Promise(resolve => setTimeout(resolve, 100));
+        console.log(`    ✅ Found ${contents} lines in ${repo.full_name}`);
+        
+        // Add a small delay to avoid hitting rate limits
+        await new Promise(resolve => setTimeout(resolve, 200));
         
       } catch (error) {
-        console.warn(`Could not fetch contents for ${owner}/${repo.name}:`, error.message);
+        console.warn(`    ❌ Could not fetch contents for ${owner}/${repo.name}:`, error.message);
         continue;
       }
     }
     
+    console.log(`📏 Total lines of code for ${owner}: ${totalLines}`);
     return totalLines;
   }
 
   async getRepositoryContents(owner, repo, path = '', codeExtensions, depth = 0) {
     // Limit recursion depth to avoid infinite loops and excessive API calls
-    if (depth > 3) return 0;
+    if (depth > 2) return 0; // Reduced depth for better performance
     
     let totalLines = 0;
     
@@ -301,43 +309,114 @@ class GitHubStatsGenerator {
       
       const contents = Array.isArray(response.data) ? response.data : [response.data];
       
-      for (const item of contents.slice(0, 50)) { // Limit items per directory
-        if (item.type === 'file') {
-          // Check if it's a code file
-          const ext = path.extname(item.name).toLowerCase();
-          if (codeExtensions.has(ext) && item.size && item.size < 1000000) { // Skip very large files
-            try {
-              // Get file content
-              const fileResponse = await this.octokit.rest.repos.getContent({
-                owner: owner,
-                repo: repo,
-                path: item.path
-              });
+      for (const item of contents.slice(0, 30)) { // Reduced limit for better performance
+        try {
+          if (item.type === 'file') {
+            // Check if it's a code file
+            const ext = this.getFileExtension(item.name).toLowerCase();
+            
+            if (codeExtensions.has(ext) && item.size && item.size < 500000) { // Reduced max file size
+              console.log(`      📄 Analyzing ${item.path} (${item.size} bytes)`);
               
-              if (fileResponse.data.content) {
-                const content = Buffer.from(fileResponse.data.content, 'base64').toString('utf-8');
-                const lines = content.split('\n').filter(line => line.trim().length > 0);
-                totalLines += lines.length;
+              try {
+                // Get file content
+                const fileResponse = await this.octokit.rest.repos.getContent({
+                  owner: owner,
+                  repo: repo,
+                  path: item.path
+                });
+                
+                if (fileResponse.data.content && fileResponse.data.encoding === 'base64') {
+                  const content = Buffer.from(fileResponse.data.content, 'base64').toString('utf-8');
+                  const lines = content.split(/\r?\n/).filter(line => {
+                    const trimmed = line.trim();
+                    // Filter out empty lines and common comment-only lines
+                    return trimmed.length > 0 && 
+                           !trimmed.match(/^\/\/\s*$/) && 
+                           !trimmed.match(/^\/\*\s*\*?\/$/) && 
+                           !trimmed.match(/^\*\s*$/) &&
+                           !trimmed.match(/^#\s*$/) &&
+                           !trimmed.match(/^<!--\s*-->$/);
+                  });
+                  
+                  const lineCount = lines.length;
+                  totalLines += lineCount;
+                  
+                  if (lineCount > 0) {
+                    console.log(`        ✅ ${lineCount} lines in ${item.name}`);
+                  }
+                }
+              } catch (fileError) {
+                console.warn(`        ⚠️ Could not read file ${item.path}:`, fileError.message);
+                continue;
               }
-            } catch (fileError) {
-              // Skip files we can't read
-              continue;
+            }
+          } else if (item.type === 'dir' && depth < 2) {
+            // Skip common directories that don't contain source code
+            const skipDirs = ['node_modules', '.git', '.github', 'vendor', 'build', 'dist', 'out', 'target', '__pycache__', '.vscode', '.idea'];
+            if (!skipDirs.some(skipDir => item.name.toLowerCase().includes(skipDir.toLowerCase()))) {
+              // Recursively get contents of subdirectories
+              const subdirLines = await this.getRepositoryContents(owner, repo, item.path, codeExtensions, depth + 1);
+              totalLines += subdirLines;
             }
           }
-        } else if (item.type === 'dir' && depth < 3) {
-          // Recursively get contents of subdirectories
-          const subdirLines = await this.getRepositoryContents(owner, repo, item.path, codeExtensions, depth + 1);
-          totalLines += subdirLines;
+        } catch (itemError) {
+          console.warn(`        ⚠️ Error processing item ${item.name}:`, itemError.message);
+          continue;
         }
       }
       
     } catch (error) {
-      // If we can't access the repository or path, return 0
+      console.warn(`      ❌ Could not access repository path ${path}:`, error.message);
       return 0;
     }
     
     return totalLines;
   }
+
+  // Helper method to get file extension
+  getFileExtension(filename) {
+    const lastDotIndex = filename.lastIndexOf('.');
+    return lastDotIndex === -1 ? '' : filename.substring(lastDotIndex);
+  }
+
+  // Alternative method using GitHub's statistics API (more efficient but less detailed)
+  async getTotalLinesOfCodeAlternative(repos, owner) {
+    console.log(`📏 Calculating lines of code using GitHub API for ${owner}...`);
+    let totalLines = 0;
+    
+    for (const repo of repos.slice(0, 30)) {
+      try {
+        // Get repository languages (which includes byte counts)
+        const languagesResponse = await this.octokit.rest.repos.listLanguages({
+          owner: owner,
+          repo: repo.name
+        });
+        
+        // Approximate lines of code based on language bytes
+        // This is a rough estimation: average ~50 characters per line
+        const repoBytes = Object.values(languagesResponse.data).reduce((sum, bytes) => sum + bytes, 0);
+        const estimatedLines = Math.round(repoBytes / 50);
+        
+        totalLines += estimatedLines;
+        
+        if (estimatedLines > 0) {
+          console.log(`  📂 ${repo.full_name}: ~${estimatedLines} lines (${repoBytes} bytes)`);
+        }
+        
+        // Small delay to avoid rate limits
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+      } catch (error) {
+        console.warn(`Could not fetch languages for ${owner}/${repo.name}:`, error.message);
+        continue;
+      }
+    }
+    
+    console.log(`📏 Estimated total lines of code for ${owner}: ${totalLines}`);
+    return totalLines;
+  }
+}
 
   calculateCombinedStats() {
     console.log('🔄 Calculating combined statistics...');
