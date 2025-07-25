@@ -129,6 +129,29 @@
 
 ---
 
+## 🔗 Connect
+
+#### 📝 Writing & Blogging
+[![Hashnode](https://img.shields.io/badge/Hashnode-2962FF?style=for-the-badge&logo=hashnode&logoColor=white)](https://ukr-projects.hashnode.dev/)
+[![Medium](https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white)](https://medium.com/@ukrpurojekuto)
+
+#### 💼 Professional
+[![Website](https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=About.me&logoColor=white)](https://ukr-projects.github.io/ukr-projects/)
+[![ukr-projects](https://img.shields.io/badge/main-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ukr-projects)
+[![cyberx-projects](https://img.shields.io/badge/cybersecurity-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/cyberx-projects)
+[![contro-projects](https://img.shields.io/badge/frontend-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/contro-projects)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/u-k-r/ )
+[![Main Channel](https://img.shields.io/badge/main-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@ujjwal-krai)
+
+#### 🌐 Social
+[![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/ukr_projects)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/ukr_projects)
+[![Tech Channel](https://img.shields.io/badge/tech-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@ukr-projects)
+[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/ukr_projects)
+[![Reddit](https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&logo=reddit&logoColor=white)](https://www.reddit.com/user/mrujjwalkr)
+
+---
+
 ## 🌟 Top Languages
 
 <img src="./assets/languages.svg" alt="Top Languages" width="100%" />
