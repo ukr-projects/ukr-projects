@@ -13,9 +13,9 @@
 |--------|----------|------------------------|-----------|
 | 📚 Repositories | 9 | 3 | **12** |
 | ⭐ Stars | 44 | 6 | **50** |
-| 💻 Commits | 621 | 126 | **747** |
+| 💻 Commits | 633 | 127 | **760** |
 | 🐛 Issues | 4 | 2 | **6** |
-| 📏 Lines of Code | 9,465 | 2,051 | **11,516** |
+| 📏 Lines of Code | 10,852 | 2,051 | **12,903** |
 
 *Note: Organization stats exclude repositories already counted in personal stats to avoid double counting.*
 
