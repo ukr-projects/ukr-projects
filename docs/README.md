@@ -82,8 +82,8 @@
 ## 📊 GitHub Analytics
 
 <div align="center">
-  <img src="../assets/github-stats.svg" alt="GitHub Stats" width="100%" />
-  <img src="../assets/organizations.svg" alt="Organizations" width="100%" />
+  <img src="https://github.com/ukr-projects/ukr-projects/blob/main/assets/github-stats.svg" alt="GitHub Stats" width="100%" />
+  <img src="https://github.com/ukr-projects/ukr-projects/blob/main/assets/organizations.svg" alt="Organizations" width="100%" />
 </div>
 
 ---
@@ -154,7 +154,7 @@
 
 ## 🌟 Top Languages
 
-<img src="../assets/languages.svg" alt="Top Languages" width="100%" />
+<img src="https://github.com/ukr-projects/ukr-projects/blob/main/assets/languages.svg" alt="Top Languages" width="100%" />
 
 ---
 
