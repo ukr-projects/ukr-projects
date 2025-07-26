@@ -1,0 +1,38 @@
+<svg width="495" height="285" xmlns="http://www.w3.org/2000/svg">
+      <rect width="495" height="285" rx="4.5" fill="#1a1b27" stroke="#70a5fd" stroke-width="1"/>
+      
+      <text x="25" y="35" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="18" font-weight="600" fill="#70a5fd">
+        💻 Most Used Languages (Combined)
+      </text>
+        <text x="25" y="70" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
+          Python
+        </text>
+        <text x="450" y="70" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="12" fill="#38bdae" text-anchor="end">
+          86.1%
+        </text>
+        <rect x="25" y="75" width="301.35" height="8" rx="4" fill="#70a5fd" opacity="0.8"/>
+      
+        <text x="25" y="95" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
+          Jupyter Notebook
+        </text>
+        <text x="450" y="95" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="12" fill="#38bdae" text-anchor="end">
+          8.3%
+        </text>
+        <rect x="25" y="100" width="29.05" height="8" rx="4" fill="#70a5fd" opacity="0.8"/>
+      
+        <text x="25" y="120" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
+          JavaScript
+        </text>
+        <text x="450" y="120" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="12" fill="#38bdae" text-anchor="end">
+          5.4%
+        </text>
+        <rect x="25" y="125" width="18.900000000000002" height="8" rx="4" fill="#70a5fd" opacity="0.8"/>
+      
+        <text x="25" y="145" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
+          Batchfile
+        </text>
+        <text x="450" y="145" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="12" fill="#38bdae" text-anchor="end">
+          0.1%
+        </text>
+        <rect x="25" y="150" width="0.35000000000000003" height="8" rx="4" fill="#70a5fd" opacity="0.8"/>
+      </svg>
