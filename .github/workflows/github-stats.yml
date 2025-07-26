@@ -26,8 +26,7 @@ jobs:
         
     - name: Install dependencies
       run: |
-        mkdir -p package
-        cd package
+        cd src
         npm init -y
         npm install @octokit/rest
         
@@ -36,8 +35,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       run: |
-        cd package
-        node ../src/generate-stats.js
+        cd src
+        node generate-stats.js
       
     - name: Commit and push if changed
       run: |
