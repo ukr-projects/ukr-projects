@@ -671,7 +671,7 @@ DEBUG=true node generate-stats.js
 - **🐛 Issues**: [Repository Issues](https://github.com/ukr-projects/ukr-projects/issues)
 - **🔓 Security**: [Repository Security](https://github.com/ukr-projects/ukr-projects/security)
 - **⛏ Pull Requests**: [Repository Pull Requests](https://github.com/ukr-projects/ukr-projects/pulls)
-- **📖 Documentation**: [Repository Documentation](https://github.com/ukr-projects/ukr-projectst/docs)
+- **📖 Documentation**: [Repository Documentation](https://github.com/ukr-projects/ukr-projects/tree/main/docs)
 
 #### Useful Resources
 - [GitHub API Documentation](https://docs.github.com/en/rest)
