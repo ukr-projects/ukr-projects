@@ -1,141 +1,132 @@
-<h1>
-  <img src="../assets/repo-blueprint-logo.png" alt="Project Logo" width="25" height="25" style="vertical-align: middle;">
-  Repo Blueprint
-</h1>
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Status: Active](https://img.shields.io/badge/Status-Active-brightgreen.svg)](STATUS.md)
-[![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-red.svg)](CHANGELOG.md)
+# 😎 Hi
 
 <div align="center">
-  <img src="../assets/repo-blueprint-banner.jpg" alt="Project Banner" width="80%">
-</div>
-
-<div align="center">
-  <img src="https://readme-typing-svg.demolab.com/?lines=The+Boilerplate+repo+that+doesn't+suck&font=Fira%20Code&pause=1000&color=F75C7E&center=true&vCenter=true&width=600&height=30&cursor=true">
-</div>
-
----
-## 🖼 Screenshot
-
-<div align="center">
-  <img src="../assets/screenshots/community-standard.jpg" alt="Community Standards" />
-  <p><em>Community Standards</em></p>
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=00D4FF&center=true&vCenter=true&width=600&lines=Full+Stack+Developer;AI+%26+ML+Enthusiast;Open+Source+Contributor;Problem+Solver" alt="Typing SVG" />
 </div>
 
 ---
 
-## ✨ Features
-- **Clean and Professional**: It has a proper structure and beautiful Readme
-- **Easy to Use and Reusable**: This template can be used in most of the mordern repo's
-- **Simple and Detailed**: It is properly documented and follows community standards
+## 🚀 About Me
+
+<img align="right" height="200" src="https://i.pinimg.com/originals/6f/b5/fc/6fb5fce9731e6e748a16c836b3ad9444.gif" alt="coding gif" />
+
+- 🔭 Currently working on **AI/ML projects and full-stack applications**
+- 🌱 Learning **Advanced Machine Learning & Cloud Architecture**
+- 👯 Looking to collaborate on **Open Source Projects**
+- 💬 Ask me about **Python, JavaScript, AI, and Software Development**
+- 📫 Reach me at: **ujjwalkrai@gmail.com**
+- ⚡ Fun fact: **I love solving complex problems with elegant code**
+
+<br clear="both"/>
 
 ---
 
-## 🎉 What’s New in v0.1.0
+## 🛠️ Tech Stack
 
-- **Professional README.md Redesign**
-  - Complete visual overhaul with a new professional look.
-  - Consistent styling across all sections using html.
-  - Improved layout for a better user experience.
-- **Added Important Templates**
-  - Added a Pull Request Template in .github folder
-  - Added two Issue Templates (Bug and Feature Template)
-- **Added SECURITY.md**
-  - Minimal SECURITY.md that can be modified for any repository or project
+<div align="center">
 
----
+### Programming Languages
+<div>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="40" alt="python" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="40" alt="typescript" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" height="40" alt="csharp" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" height="40" alt="c" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" height="40" alt="cplusplus" />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=rust" height="40" alt="rust" />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=ruby" height="40" alt="ruby" />
+</div>
 
-## 📁 Folder Structure
+### Frameworks & Libraries
+<div>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" alt="react" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="40" alt="nodejs" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" height="40" alt="django" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" height="40" alt="flask" />
+  <img width="12" />
+  <img src="https://cdn.simpleicons.org/pytorch/EE4C2C" height="40" alt="pytorch" />
+  <img width="12" />
+  <img src="https://cdn.simpleicons.org/tensorflow/FF6F00" height="40" alt="tensorflow" />
+  <img width="12" />
+  <img src="https://cdn.simpleicons.org/qt/41CD52" height="40" alt="qt" />
+</div>
 
-```
-repo-blueprint/
-├── .github/
-│   ├── ISSUE_TEMPLATE/
-│   │   ├── bug_report.md
-│   │   └── feature_request.md
-│   └── PULL_REQUEST_TEMPLATE.md
-├── assets/
-│   ├── repo-blueprint-banner.jpg
-│   ├── repo-blueprint-logo.png
-│   └── screenshots/
-│       └── community-standard.jpg
-├── docs/
-│   ├── CODE_OF_CONDUCT.md
-│   ├── CONTRIBUTING.md
-│   ├── README.md
-│   └── SECURITY.md
-└── LICENSE
-```
----
+### Tools & Platforms
+<div>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" height="40" alt="docker" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" height="40" alt="kubernetes" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="40" alt="git" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" height="40" alt="mongodb" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" height="40" alt="postgresql" />
+  <img width="12" />
+</div>
 
-## 🕹 Usage
-
-### Prerequisites
-
-- GitHub
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/ukr-projects/repo-blueprint.git
-```
-
-For more detailed documentation, see our [USAGE.md](USAGE.md)
-
----
-
-## 🤝 Contributing
-
-Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+</div>
 
 ---
 
-### Code of Conduct
+## 📊 GitHub Analytics
 
-This project follows our [Code of Conduct](CODE_OF_CONDUCT.md). Please read it before contributing.
-
----
-
-## 📋 Roadmap
-
-- [x] Advance documentation
-- [x] Initial release
-- [x] Basic documentation
-
-See the [open issues](https://github.com/ukr-projects/repo-blueprint/issues) for a full list of proposed features and known issues.
+<div align="center">
+  <img src="../assets/github-stats.svg" alt="GitHub Stats" width="100%" />
+  <img src="../assets/organizations.svg" alt="Organizations" width="100%" />
+</div>
 
 ---
 
-## 📝 Changelog
+## 🎯 Current Focus
 
-All notable changes to this project are documented in [CHANGELOG.md](CHANGELOG.md).
+<div align="center">
+  <table>
+    <tr>
+      <td width="50%" align="center">
+        <h3>🤖 AI & Machine Learning</h3>
+        <p>Building intelligent systems with deep learning frameworks</p>
+        <img src="https://img.shields.io/badge/Focus-AI%2FML-blue?style=for-the-badge&logo=tensorflow" />
+      </td>
+      <td width="50%" align="center">
+        <h3>☁️ Cloud Architecture</h3>
+        <p>Designing scalable cloud-native applications</p>
+        <img src="https://img.shields.io/badge/Focus-Cloud-orange?style=for-the-badge&logo=amazonaws" />
+      </td>
+    </tr>
+    <tr>
+      <td width="50%" align="center">
+        <h3>🌐 Full Stack Development</h3>
+        <p>Creating end-to-end web applications</p>
+        <img src="https://img.shields.io/badge/Focus-Full%20Stack-green?style=for-the-badge&logo=react" />
+      </td>
+      <td width="50%" align="center">
+        <h3>🔐 DevSecOps</h3>
+        <p>Implementing secure development practices</p>
+        <img src="https://img.shields.io/badge/Focus-DevSecOps-red?style=for-the-badge&logo=security" />
+      </td>
+    </tr>
+  </table>
+</div>
 
 ---
 
-## 📄 License
+## 📈 Contribution Graph
 
-This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
+<div align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=ukr-projects&theme=tokyo-night&area=true&hide_border=true" alt="Contribution Graph" />
+</div>
 
----
-
-## 🙏 Acknowledgments
-
-- Thanks to those who used this repository
-- Thanks to those who supported this repository
-- Thanks to Libraries and tools that made this possible
-
----
-
-## 📞 Support
-
-- 📧 Email: ujjwalkrai@gmail.com
-- 🐛 Issues: [Repo Issues](https://github.com/ukr-projects/repo-blueprint/issues)
-- 🔓 Security: [Repo Security](https://github.com/ukr-projects/repo-blueprint/security)
-- ⛏ Pull Request: [Repo Pull Request](https://github.com/ukr-projects/repo-blueprint/pulls)
-- 📖 Docs: [Repo Documentation](https://github.com/ukr-projects/repo-blueprint/docs)
-- 📃 Changelog: [Repo Changelog](https://github.com/ukr-projects/repo-blueprint/docs/CHANGELOG.md)
 ---
 
 ## 🔗 Connect
@@ -145,7 +136,7 @@ This project is licensed under the MIT License - see the [LICENSE](../LICENSE) f
 [![Medium](https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white)](https://medium.com/@ukrpurojekuto)
 
 #### 💼 Professional
-[![Website](https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=About.me&logoColor=white)](https://ukr-projects.github.io/ukr-projects/)
+[![Website](https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=&logoColor=white)](https://ukr-projects.github.io/ukr-projects/)
 [![ukr-projects](https://img.shields.io/badge/main-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ukr-projects)
 [![cyberx-projects](https://img.shields.io/badge/cybersecurity-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/cyberx-projects)
 [![contro-projects](https://img.shields.io/badge/frontend-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/contro-projects)
@@ -161,8 +152,13 @@ This project is licensed under the MIT License - see the [LICENSE](../LICENSE) f
 
 ---
 
-<div align="center">
-  Made with ❤️ by <a href="https://github.com/ukr-projects">ukr</a>
-</div>
+## 🌟 Top Languages
+
+<img src="../assets/languages.svg" alt="Top Languages" width="100%" />
 
 ---
+
+<div align="center">
+  <h3>Thanks for visiting! 😊</h3>
+  <p>⭐ Don't forget to star my repositories if you find them useful!</p>
+</div>
