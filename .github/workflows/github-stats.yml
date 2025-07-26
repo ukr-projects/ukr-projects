@@ -26,9 +26,13 @@ jobs:
         
     - name: Install dependencies
       run: |
-        cd docs
         npm init -y
         npm install @octokit/rest
+        
+    - name: Generate package files in docs
+      run: |
+        cp package.json docs/
+        cp package-lock.json docs/
         
     - name: Generate stats
       env:
