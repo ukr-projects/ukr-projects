@@ -8,8 +8,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "@octokit/rest": "^21.1.1"
-  }
+  },
+  "description": ""
 }
