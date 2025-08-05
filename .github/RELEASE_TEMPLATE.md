@@ -76,7 +76,7 @@ MD5: [checksum-here]
 - 🔓 Security: [Repo Security](https://github.com/ukr-projects/ukr-projects/security)
 - ⛏ Pull Request: [Repo Pull Request](https://github.com/ukr-projects/ukr-projects/pulls)
 - 📖 Docs: [Repo Documentation](https://github.com/ukr-projects/ukr-projects/tree/main/docs)
-- 📃 Changelog: [Repo Changelog](https://github.com/ukr-projects/ukr-projects/docs/CHANGELOG.md)
+- 📃 Changelog: [Repo Changelog](https://github.com/ukr-projects/ukr-projects/blob/main/docs/CHANGELOG.md)
 ---
 
 *This release source code was tested on: Windows, MacOS and Ubuntu*
