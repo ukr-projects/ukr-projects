@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Studio - Content Creator Portfolio</title>
+    <meta name="description"
+        content="Professional content creator specializing in video editing, shorts, reels and digital storytelling">
+
+    <!-- Preload critical resources for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-bg: #000000;
+            --darker-bg: #050505;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --glow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Performance-optimized smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom cursor */
+        body {
+            cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="none" stroke="rgba(102,126,234,0.8)" stroke-width="2"/></svg>') 10 10, auto;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.7;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        /* Content Categories Section */
+        .categories {
+            padding: 8rem 2rem;
+            background: linear-gradient(180deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .category-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+        }
+
+        .category-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .category-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 8rem 2rem;
+            background: var(--dark-bg);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .skill-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.02);
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .skill-level {
+            font-weight: 600;
+            color: #4facfe;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+            animation: progressAnimation 2s ease-in-out;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 8rem 2rem;
+            background: linear-gradient(180deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            background: var(--secondary-gradient);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            opacity: 0.8;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-link {
+            color: #4facfe;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: #00f2fe;
+            transform: translateX(5px);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 2rem;
+            background: var(--dark-bg);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-button {
+            padding: 1rem 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-button:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 2rem;
+            background: var(--darker-bg);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes progressAnimation {
+            from {
+                width: 0%;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .categories-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Performance optimizations */
+        .lazy-load {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .lazy-load.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--primary-gradient);
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav-container">
+            <div class="logo">Creative Studio</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#categories" class="nav-link">Content</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-element">🎬</div>
+        <div class="floating-element">✨</div>
+        <div class="floating-element">🚀</div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">Content Creator</h1>
+            <p class="hero-subtitle">Transforming ideas into viral content through innovative video editing,
+                storytelling, and digital creativity</p>
+            <a href="#projects" class="cta-button">View My Work</a>
+        </div>
+    </section>
+
+    <!-- Content Categories -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2 class="section-title">Content Categories</h2>
+
+            <div class="categories-grid">
+                <div class="category-card lazy-load">
+                    <div class="category-icon">🎥</div>
+                    <h3 class="category-title">Long-Form Videos</h3>
+                    <p class="category-description">Cinematic storytelling with advanced editing techniques, color
+                        grading, and immersive audio design for YouTube and brand content.</p>
+                    <div class="category-stats">
+                        <div class="stat">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Videos</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">8+</div>
+                            <div class="stat-label">Channel</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-card lazy-load">
+                    <div class="category-icon">📱</div>
+                    <h3 class="category-title">Shorts & Reels</h3>
+                    <p class="category-description">High-impact vertical content optimized for TikTok, Instagram Reels,
+                        and YouTube Shorts with trending effects and transitions.</p>
+                    <div class="category-stats">
+                        <div class="stat">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Shorts/Reels</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">25+</div>
+                            <div class="stat-label">Accounts</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-card lazy-load">
+                    <div class="category-icon">🎨</div>
+                    <h3 class="category-title">Motion Graphics</h3>
+                    <p class="category-description">Custom animations, logo reveals, and dynamic graphics that bring
+                        brands to life with modern design principles.</p>
+                    <div class="category-stats">
+                        <div class="stat">
+                            <div class="stat-number">30+</div>
+                            <div class="stat-label">Animations</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">Effects/Transitions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+
+            <div class="skills-grid">
+                <div class="skill-item lazy-load">
+                    <div class="skill-header">
+                        <span class="skill-name">Video Editing (Davinci Resolve)</span>
+                        <span class="skill-level">80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item lazy-load">
+                    <div class="skill-header">
+                        <span class="skill-name">Capcut</span>
+                        <span class="skill-level">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item lazy-load">
+                    <div class="skill-header">
+                        <span class="skill-name">Color Grading & Correction</span>
+                        <span class="skill-level">88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item lazy-load">
+                    <div class="skill-header">
+                        <span class="skill-name">Audio Editing & Sound Design</span>
+                        <span class="skill-level">60%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item lazy-load">
+                    <div class="skill-header">
+                        <span class="skill-name">Storytelling & Script Writing</span>
+                        <span class="skill-level">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 92%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item lazy-load">
+                    <div class="skill-header">
+                        <span class="skill-name">Social Media Optimization</span>
+                        <span class="skill-level">87%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 87%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+
+            <div class="projects-grid">
+                <div class="project-card lazy-load">
+                    <div class="project-image">🏆</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Beat Montage Videos</h3>
+                        <p class="project-description">Everyone like music, so do I, that why, I create montage and use creativity to 
+                            bring liveliness in videos.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Davinci Resolve</span>
+                            <span class="tag">Capcut</span>
+                            <span class="tag">Clipchamp</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+
+                <div class="project-card lazy-load">
+                    <div class="project-image">🎬</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Documentary Series</h3>
+                        <p class="project-description">A documentary series with advanced editing techniques,
+                            professional setup. Turning boring topics into interesting and simple.</p>
+                        <div class="project-tags">
+                            <span class="tag">Long-form</span>
+                            <span class="tag">Documentary</span>
+                            <span class="tag">Color Grading</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+
+                <div class="project-card lazy-load">
+                    <div class="project-image">📱</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Educational Series</h3>
+                        <p class="project-description">A series of educational shorts that accumulated 10M+ views,
+                            utilizing trending effects and optimized for mobile consumption.</p>
+                        <div class="project-tags">
+                            <span class="tag">Instagram</span>
+                            <span class="tag">Vertical Video</span>
+                            <span class="tag">Trending</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+
+                <div class="project-card lazy-load">
+                    <div class="project-image">✨</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Motion Graphics Package</h3>
+                        <p class="project-description">Complete branding package including logo animations, transitions,
+                            and graphic elements for a tech startup's video content.</p>
+                        <div class="project-tags">
+                            <span class="tag">Motion Graphics</span>
+                            <span class="tag">Branding</span>
+                            <span class="tag">Animation</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Create Together</h2>
+            <div class="contact-content">
+                <p class="contact-text">Ready to elevate your content? Let's discuss your next project and bring your
+                    vision to life with professional editing and creative storytelling.</p>
+                <div class="contact-buttons">
+                    <a href="mailto:ujjwalkrai@gmail.com" class="contact-button">
+                        ✉️ Email Me
+                    </a>
+                    <a href="https://www.linkedin.com/in/u-k-r/" class="contact-button">
+                        💼 LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Creative Studio. Crafted with passion for video editing.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Performance-optimized JavaScript
+
+        // Scroll progress indicator
+        function updateScrollIndicator() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+        }
+
+        // Smooth scroll for navigation links
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    if (href === '#') return;
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Lazy loading animation with Intersection Observer
+        function initLazyLoad() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('loaded');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+
+            document.querySelectorAll('.lazy-load').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Navbar background opacity on scroll
+        function handleNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            const scrolled = window.pageYOffset > 50;
+
+            if (scrolled) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.8)';
+                navbar.style.boxShadow = 'none';
+            }
+        }
+
+        // Parallax effect for floating elements
+        function handleParallax() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelectorAll('.floating-element');
+            const speed = 0.5;
+
+            parallax.forEach((element, index) => {
+                const yPos = -(scrolled * speed * (index + 1) * 0.3);
+                element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+            });
+        }
+
+        // Skill progress animation when in view
+        function animateSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bar = entry.target;
+                        const width = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 200);
+                        observer.unobserve(bar);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            skillBars.forEach(bar => observer.observe(bar));
+        }
+
+        // Throttle function for performance
+        function throttle(func, limit) {
+            let inThrottle;
+            return function () {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            }
+        }
+
+        // Add hover effects for project cards
+        function initProjectHoverEffects() {
+            const projectCards = document.querySelectorAll('.project-card');
+
+            projectCards.forEach(card => {
+                card.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+
+                card.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        }
+
+        // Custom cursor effect
+        function initCustomCursor() {
+            const cursor = document.createElement('div');
+            cursor.className = 'custom-cursor';
+            cursor.style.cssText = `
+                position: fixed;
+                width: 20px;
+                height: 20px;
+                background: radial-gradient(circle, rgba(102,126,234,0.8) 0%, transparent 70%);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                mix-blend-mode: screen;
+                transition: transform 0.1s ease;
+            `;
+            document.body.appendChild(cursor);
+
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX - 10 + 'px';
+                cursor.style.top = e.clientY - 10 + 'px';
+            });
+
+            document.querySelectorAll('a, button, .category-card, .project-card').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(2)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                });
+            });
+        }
+
+        // Typing animation for hero text
+        function initTypingAnimation() {
+            const heroTitle = document.querySelector('.hero-title');
+            const text = heroTitle.textContent;
+            heroTitle.textContent = '';
+
+            let i = 0;
+            const typeWriter = () => {
+                if (i < text.length) {
+                    heroTitle.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            };
+
+            setTimeout(typeWriter, 1000);
+        }
+
+        // Performance monitoring
+        function initPerformanceOptimizations() {
+            // Preload critical resources only if images are present in the DOM
+            const usedImages = Array.from(document.images).map(img => img.src);
+            usedImages.forEach(src => {
+                if (src) {
+                    const link = document.createElement('link');
+                    link.rel = 'preload';
+                    link.as = 'image';
+                    link.href = src;
+                    document.head.appendChild(link);
+                }
+            });
+
+            // Defer non-critical animations
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    document.body.classList.add('loaded');
+                }, 500);
+            });
+        }
+
+        // Initialize all functions
+        document.addEventListener('DOMContentLoaded', function () {
+            initSmoothScroll();
+            initLazyLoad();
+            animateSkillBars();
+            initProjectHoverEffects();
+            initCustomCursor();
+            initTypingAnimation();
+            initPerformanceOptimizations();
+        });
+
+        // Optimized scroll event listeners
+        window.addEventListener('scroll', throttle(() => {
+            updateScrollIndicator();
+            handleNavbarScroll();
+            handleParallax();
+        }, 16)); // ~60fps
+
+        // Add some interactive elements
+        document.addEventListener('keydown', function (e) {
+            // Easter egg: Press 'C' for creative mode
+            if (e.key.toLowerCase() === 'c') {
+                document.body.style.filter = 'hue-rotate(60deg)';
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                }, 2000);
+            }
+        });
+
+        // Add contact form functionality (if needed)
+        function initContactForm() {
+            const contactButtons = document.querySelectorAll('.contact-button');
+            if (this.getAttribute('href') === '#') {
+                e.preventDefault();
+                // Add your contact logic here
+                console.log('Contact method clicked:', this.textContent);
+            }
+            console.log('Contact method clicked:', this.textContent);
+        }
+
+        // Initialize contact form
+        document.addEventListener('DOMContentLoaded', initContactForm);
+
+        // Add floating particles effect
+        function createFloatingParticles() {
+            const particlesContainer = document.createElement('div');
+            particlesContainer.className = 'particles-container';
+            particlesContainer.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                pointer-events: none;
+                z-index: -1;
+            `;
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const xTrans = Math.random() * 200 - 100; // Unique horizontal translation per particle
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 2px;
+                    height: 2px;
+                    background: rgba(102, 126, 234, 0.3);
+                    border-radius: 50%;
+                    animation: floatParticle${i} ${5 + Math.random() * 10}s linear infinite;
+                    left: ${Math.random() * 100}vw;
+                    animation-delay: ${Math.random() * 5}s;
+                `;
+                // Add unique keyframes for each particle
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes floatParticle${i} {
+                        0% {
+                            transform: translateY(100vh) translateX(0px);
+                            opacity: 0;
+                        }
+                        10% {
+                            opacity: 1;
+                        }
+                        90% {
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: translateY(-10vh) translateX(${xTrans}px);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize particles on load
+        window.addEventListener('load', createFloatingParticles);
+
+        // Service Worker for caching (if needed in production)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+
+</html>
