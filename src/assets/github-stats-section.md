@@ -12,14 +12,14 @@
 | Metric | Personal | Organizations (Unique) | **Total** |
 |--------|----------|------------------------|-----------|
 | 📚 Repositories | 9 | 4 | **13** |
-| ⭐ Stars | 49 | 6 | **55** |
-| 💻 Commits | 771 | 151 | **922** |
+| ⭐ Stars | 48 | 6 | **54** |
+| 💻 Commits | 772 | 151 | **923** |
 | 🐛 Issues | 4 | 3 | **7** |
 | 📏 Lines of Code | 9,414 | 2,328 | **11,742** |
 
 *Note: Organization stats exclude repositories already counted in personal stats to avoid double counting.*
 
-*Last updated: 2025-08-29*
+*Last updated: 2025-08-30*
 
 </div>
 <!-- End GitHub Stats -->
