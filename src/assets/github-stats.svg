@@ -14,38 +14,38 @@
       </text>
       
       <text x="25" y="65" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-        📊 Total Repositories: 13
+        📊 Total Repositories: 10
       </text>
       <text x="25" y="85" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-        ⭐ Total Stars: 55
+        ⭐ Total Stars: 60
       </text>
       <text x="25" y="105" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-        💻 Total Commits: 947
+        💻 Total Commits: 280
       </text>
       <text x="25" y="125" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-        🐛 Total Issues: 7
+        🐛 Total Issues: 0
       </text>
       <text x="25" y="145" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-        📏 Total Lines of Code: 11,742
+        📏 Total Lines of Code: 2,192
       </text>
       
       <text x="270" y="65" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-        🏠 Personal: 9 repos, 49 stars
+        🏠 Personal: 10 repos, 60 stars
       </text>
       <text x="270" y="85" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
         🏢 Organizations: 3 orgs
       </text>
       <text x="270" y="105" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-        💻 Personal Commits: 794
+        💻 Personal Commits: 280
       </text>
       <text x="270" y="125" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-        🐛 Personal Issues: 4
+        🐛 Personal Issues: 0
       </text>
       <text x="270" y="145" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
-        📏 Personal LoC: 9,414
+        📏 Personal LoC: 2,192
       </text>
       
       <text x="25" y="185" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="12" fill="#38bdae">
-        🔄 Last updated: 2025-09-21
+        🔄 Last updated: 2025-10-24
       </text>
     </svg>
