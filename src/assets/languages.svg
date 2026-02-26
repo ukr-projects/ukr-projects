@@ -8,25 +8,25 @@
           Python
         </text>
         <text x="450" y="70" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="12" fill="#38bdae" text-anchor="end">
-          83.6%
+          82.8%
         </text>
-        <rect x="25" y="75" width="292.59999999999997" height="8" rx="4" fill="#70a5fd" opacity="0.8"/>
+        <rect x="25" y="75" width="289.8" height="8" rx="4" fill="#70a5fd" opacity="0.8"/>
       
         <text x="25" y="95" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
           JavaScript
         </text>
         <text x="450" y="95" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="12" fill="#38bdae" text-anchor="end">
-          8.9%
+          9.7%
         </text>
-        <rect x="25" y="100" width="31.150000000000002" height="8" rx="4" fill="#70a5fd" opacity="0.8"/>
+        <rect x="25" y="100" width="33.949999999999996" height="8" rx="4" fill="#70a5fd" opacity="0.8"/>
       
         <text x="25" y="120" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
           HTML
         </text>
         <text x="450" y="120" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="12" fill="#38bdae" text-anchor="end">
-          4.9%
+          5.0%
         </text>
-        <rect x="25" y="125" width="17.150000000000002" height="8" rx="4" fill="#70a5fd" opacity="0.8"/>
+        <rect x="25" y="125" width="17.5" height="8" rx="4" fill="#70a5fd" opacity="0.8"/>
       
         <text x="25" y="145" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="14" fill="#c9d1d9">
           CSS
